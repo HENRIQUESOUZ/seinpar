@@ -1,0 +1,78 @@
+<!DOCTYPE html>"/home/henrique/Desktop/Untitled Folder/Seimpar/src/main/webapp/app/produto/produto.html"
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html ng-app="produto">
+    <head>
+        <title>TODO supply a title</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <script src="../../resources/angular/angular.min.js"></script>
+        <script src="../../resources/angular/angular-animate.js"></script>
+        <script src="../../resources/angular/angular-route.min.js"></script>
+        <script src="../../resources/angular/angularFilter.js"></script>
+        <script src="../../resources/jquery/jquery-3.1.0.min.js"></script>
+        <script src="../../resources/jquery/jquery.maskMoney.js"></script>
+        <script src="../../resources/utils/mascara.js"></script>
+        <script src="produtoController.js"></script>
+        <link rel="stylesheet" href="../../resources/bootstrap/css/bootstrap.min.css"/>
+    </head>
+    <body ng-controller="produtoControler">
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="container">
+                    <form>
+                        <input type="text" class="form-control" ng-model="produto.nome" 
+                               placeholder="Nome" required/>
+                        <input type="text" class="form-control" ng-model="produto.preco" 
+                               placeholder="Preço" maskmoney-dir
+                               required/>
+                        <input type="text" class="form-control" ng-model="produto.estoque" 
+                               placeholder="Estoque" required/>
+                        <input type="text" class="form-control" ng-model="produto.unit" 
+                               placeholder="Unit" required/>
+                        <button class="btn btn-default btn-lg btn-block" style="width: 120px;" ng-click="salvar()">
+                            <span class="glyphicon glyphicon-floppy-disk">
+                                Salvar
+                        </button>
+                    </form>
+                    <table class="table table-striped">
+                        <tr>
+                            <th>#</th>
+                            <th>Nome</th>
+                            <th>Preço</th>
+                            <th>Estoque</th>
+                            <th>Unit</th>
+                            <th>Alterar</th>
+                            <th>Excluir</th>
+                        </tr>
+                        <tr ng-repeat="item in listagem">
+                            <td>{{item.id}}</td>
+                            <td>{{item.nome}}</td>
+                            <td>{{item.preco | currency:"R$":2}}</td>
+                            <td>{{item.estoque}}</td>
+                            <td>{{item.unit}}</td>
+                            <td>
+                                <button class="btn btn-default btn-lg btn-block" ng-click="alterar(item)" style="width: 60px;">
+                                    <span class="glyphicon glyphicon-pencil">
+                                </button>
+                            </td>
+                            <td>
+                                <button class="btn btn-default btn-lg btn-block" ng-click="excluir(item)" style="width: 60px;">
+                                    <span class="glyphicon glyphicon-trash">
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+    </body>
+</html>

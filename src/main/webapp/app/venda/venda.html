@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html ng-app="venda">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+
+        <link rel="stylesheet" href="../../resources/bootstrap/css/bootstrap.min.css"/>
+        <script src="../../resources/angular/angular.min.js"></script>
+        <script src="../../resources/angular/angular-animate.js"></script>
+        <script src="../../resources/angular/angular-route.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js"></script>
+        <script src="vendaController.js"></script>
+    </head>
+    <body ng-controller="vendaControler">
+
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">FATECIE</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Clientes</a></li>
+                    <li><a href="#">Produtos</a></li> 
+                    <li class="active"><a href="#">Vendas</a></li> 
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Relatório
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Clientes</a></li>
+                            <li><a href="#">Produtos</a></li>
+                            <li><a href="#">Vendas</a></li> 
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container-fluid">	
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a  href="#1" data-toggle="tab">Produtos</a>
+                </li>
+                <li>
+                    <a href="#2" data-toggle="tab">Fechamento</a>
+                </li>
+            </ul>
+            <div class="tab-content ">
+                <div class="tab-pane active" id="1">
+                    <br/>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="panel panel-default" style="margin-bottom: 0px;">
+                                <div class="panel-heading">
+                                    <h5 style="font-weight: bold;">Resumo parcial</h5>
+                                </div>
+                                <div class="panel-body">
+                                    Total Parcial {{venda.total | currency:'R$ ':2}}<br/>
+                                    Quantidade de itens {{venda.vendaItens.length}}
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h5 style="font-weight: bold;">Seleção do produto</h5>
+                                </div>
+                                <div class="panel-body">
+                                    <input placeholder="Produto" type="text" ng-model="itemVenda.produto" 
+                                           uib-typeahead="produto as produto.nome for produto in getProduto($viewValue)" 
+                                           class="form-control">
+                                    
+                                    <input type="text" class="form-control"
+                                           value="{{itemVenda.produto.estoque + itemVenda.produto.unit}}"
+                                           placeholder="Estoque" readonly/>
+                                    
+                                    <input type="text" class="form-control" 
+                                           value="{{itemVenda.produto.preco | currency:'R$ ':2}}"
+                                           placeholder="Preço" readonly/>
+                                    
+                                    <input type="text" class="form-control" 
+                                           ng-model="itemVenda.quantidade"
+                                           placeholder="Quantidade" required/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-primary btn-lg btn-block"
+                                            ng-click="adicionarItem(itemVenda)">
+                                        Adicionar
+                                    </button>
+                                    <button class="btn btn-danger btn-lg btn-block">
+                                        Cancelar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Preço</th>
+                                    <th>Qtd</th>
+                                    <th>Subtotal</th>
+                                    <th>Excluir</th>
+                                </tr>
+                                <tr ng-repeat="item in venda.vendaItens track by $index">
+                                    <td>{{item.produto.nome}}</td>
+                                    <td>{{item.preco | currency:'R$ ':2}}</td>
+                                    <td>{{item.quantidade}}</td>
+                                    <td>{{(item.preco*item.quantidade) | currency:'R$ ':2}}</td>
+                                    <td>
+                                        <button class="btn btn-default btn-sm"
+                                                ng-click="remover($index)">
+                                            <span class="glyphicon glyphicon-trash">
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="tab-pane" id="2">
+                    <br/>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h5 style="font-weight: bold;">Dados da venda</h5>
+                                </div>
+                                <div class="panel-body">
+                                    <input placeholder="Cliente" type="text" ng-model="venda.cliente" 
+                                           uib-typeahead="cliente as cliente.nome for cliente in getCliente($viewValue)" 
+                                           class="form-control">
+                                    <input type="date" class="form-control" 
+                                           ng-model="venda.data"
+                                           placeholder="Data da venda" required/>
+                                    <input type="text" class="form-control"
+                                           ng-model="venda.desconto"
+                                           ng-keyup="calculaTotal()"
+                                           placeholder="Desconto" required/>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-success btn-lg btn-block"
+                                            ng-click="salvar()">
+                                        Salvar
+                                    </button>
+                                    <button class="btn btn-danger btn-lg btn-block">
+                                        Cancelar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="panel panel-default" style="margin-bottom: 0px;">
+                                <div class="panel-heading">
+                                    <h5 style="font-weight: bold;">Totais</h5>
+                                </div>
+                                <div class="panel-body">
+                                    <label>Total bruto (+) {{venda.total | currency:'R$ ':2}}</label><br/>
+                                    <label>Desconto (-) {{venda.desconto | currency:'R$ ':2}}</label><br/>
+                                    <label>Total liquido (=) {{venda.totalLiquido | currency:'R$ ':2}}</label>  
+
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h5 style="font-weight: bold;">Recebimento</h5>
+                                </div>
+                                <div class="panel-body">
+                                    <input type="text" class="form-control" 
+                                           placeholder="Valor recebido"
+                                           ng-model="valorRecebido"
+                                           ng-keyup="calculaTotal()"/>
+                                    <input type="text" class="form-control" 
+                                           placeholder="Troco" value="{{valorTroco | currency:'R$ ':2}}" readonly/>                               
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
