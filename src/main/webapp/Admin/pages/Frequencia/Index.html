@@ -177,11 +177,11 @@
                                 
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="ra" class="form-control" placeholder="Entre com seu RA(Registro academico)">
+                                        <input type="text" ng-model="aluno.ra" class="form-control" placeholder="Entre com seu RA(Registro academico)">
                                     </div>
                                 </div>
                                 
-                                <button type="button" class="btn btn-primary m-t-15 waves-effect">ENTRAR</button>
+                                <button type="button" class="btn btn-primary m-t-15 waves-effect" ng-click="salvar()">Fazer registro</button>
                             </form>
                         </div>
                     </div>

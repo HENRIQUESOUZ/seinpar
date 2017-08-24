@@ -43,12 +43,16 @@ public class FrequenciaController implements Serializable {
 
     @POST
     @Path("/")
-    public Response salvar(Aluno aluno) throws Exception {
+    public Object salvar(Aluno aluno) throws Exception {
 
         try {
-            
+            aluno = frequenciaService.pesquisaRa(aluno.getRa());
+            System.out.println(aluno);
+            if(aluno == null){
+                return RestUtil.responseMessage(Response.Status.BAD_REQUEST, "RA não encontrado.");
+            }
             frequenciaService.salvar(aluno);
-            return RestUtil.responseMessage(Response.Status.CREATED, "Frequência Registrada com Sucesso!");
+            return aluno;
         } catch (Exception e) {
             return RestUtil.responseMessage(Response.Status.BAD_REQUEST, "Falha ao Salvar");
         }
