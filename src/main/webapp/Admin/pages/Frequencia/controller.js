@@ -11,8 +11,11 @@ app.controller("frequenciaControler", function ($scope, $http) {
     $scope.salvar = function () {
         console.log("Salvar");
         $http.post("/seinpar/rest/frequencia/", $scope.aluno).then(
-                function () {
+                function (response) {
+                    console.log(response)
+                    alert("Registrado com sucesso! " + response.data.nome)
                     delete $scope.aluno;
+
                     $http.get("/seinpar/rest/frequencia/")
                             .then(function (response) {
                                 $scope.listagem = response.data;

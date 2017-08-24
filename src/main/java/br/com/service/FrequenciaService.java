@@ -29,6 +29,15 @@ public class FrequenciaService extends AbstractService<Frequencia> implements Se
         return em;
     }
 
+    public Aluno pesquisaRa(String ra) {
+        List<Aluno> alunos = getEm().createQuery("FROM Aluno WHERE ra = '" + ra + "'").getResultList();
+        if (alunos != null && !alunos.isEmpty()) {
+            return alunos.get(0);
+        }
+        System.out.println("Nenhum aluno encontrado");
+        return null;
+    }
+
     public TipoFrequencia tipoFrequencia() {
         List<TipoEntrada> tipos = getEm().createQuery("FROM TipoEntrada").getResultList();
         if (tipos != null && !tipos.isEmpty()) {
@@ -50,14 +59,13 @@ public class FrequenciaService extends AbstractService<Frequencia> implements Se
         }
     }
 
-    
     public Frequencia salvar(Aluno aluno) throws Exception {
-        
+
         Frequencia frequencia = new Frequencia();
         frequencia.setTipoFrequencia(tipoFrequencia());
-        
+        frequencia.setAluno(aluno);
+
         return super.salvar(frequencia); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
 }
