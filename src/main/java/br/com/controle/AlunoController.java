@@ -31,7 +31,7 @@ public class AlunoController implements Serializable {
     }
     
     @GET
-    @Path("/autoComplete/{query}")
+    @Path("/{query}")
     public List<Aluno> autoComplete(@PathParam("query") String nomeFone) {
         System.out.println("Chamou autocomplete");
         return alunoService.alunoAutoComplete(nomeFone);

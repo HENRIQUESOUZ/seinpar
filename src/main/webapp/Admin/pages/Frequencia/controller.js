@@ -13,14 +13,22 @@ app.controller("frequenciaControler", function ($scope, $http) {
         $http.post("/seinpar/rest/frequencia/", $scope.aluno).then(
                 function (response) {
                     console.log(response)
-                    alert("Registrado com sucesso! " + response.data.nome)
+                    if (response.data.tipoFrequencia == "ENTRADA") {
+                        alert("Olá " + response.data.aluno.nome + "! Bem vindo a Seinpar")
+                    } else {
+                        alert("Olá " + response.data.aluno.nome + "! Sua saída foi registrada! Até logo")
+                    }
                     delete $scope.aluno;
 
                     $http.get("/seinpar/rest/frequencia/")
                             .then(function (response) {
                                 $scope.listagem = response.data;
                             });
-                });
+                },
+                function (response) {
+                    alert("Ops! " + response.data.message);
+                }
+        );
     };
 
     $scope.alterar = function (aluno) {

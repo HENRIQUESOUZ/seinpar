@@ -10,6 +10,7 @@
         <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+   
     <context-param>
         <param-name>resteasy.servlet.mapping.prefix</param-name>
         <param-value>/rest</param-value>
@@ -45,4 +46,10 @@
             30
         </session-timeout>
     </session-config>
+    
+     
+    <welcome-file-list>
+        <welcome-file>Admin/pages/Alunos/novo.html</welcome-file>
+    </welcome-file-list>
+    
 </web-app>

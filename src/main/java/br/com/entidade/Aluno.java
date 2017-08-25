@@ -27,6 +27,10 @@ public class Aluno implements Serializable{
     private String ra;
     @Column(name = "aluno_rg", nullable = false)
     private Integer serie;
+    @Column(name = "aluno_mat1")
+    private String materia1;
+    @Column(name = "aluno_mat2")
+    private String materia2;
 
     public Long getId() {
         return id;
@@ -60,6 +64,21 @@ public class Aluno implements Serializable{
         this.serie = serie;
     }
 
+    public void setMateria1(String materia1) {
+        this.materia1 = materia1;
+    }
+
+    public String getMateria1() {
+        return materia1;
+    }
+
+    public void setMateria2(String materia2) {
+        this.materia2 = materia2;
+    }
+
+    public String getMateria2() {
+        return materia2;
+    }
 
     @Override
     public int hashCode() {

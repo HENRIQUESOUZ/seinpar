@@ -77,10 +77,10 @@
                     <a class="navbar-brand" href="../../index.html">Seinpar - Semana de Informática de Paranavaí - Unipar</a>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-collapse">
-                <div class="collapse navbar-collapse" id="navbar-collapse">
-                    
+                    <div class="collapse navbar-collapse" id="navbar-collapse">
+
+                    </div>
                 </div>
-            </div>
         </nav>
         <!-- #Top Bar -->
         <section>
@@ -113,7 +113,7 @@
                 <div class="menu">
                     <ul class="list">
                         <li class="header">MENU</li>
-                        <li class="active">
+                        <li >
                             <a href="/Seimpar-Front/index.html">
                                 <i class="material-icons">home</i>
                                 <span>Início</span>
@@ -125,8 +125,9 @@
                                 <span>Alunos</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="/seinpar/Admin/pages/Alunos/Index.html">
+                        
+                        <li class="active">
+                            <a  class="" href="/seinpar/Admin/pages/Frequencia/Index.html">
                                 <i class="material-icons">&#xE041;</i>
                                 <span>Frequência</span>
                             </a>
@@ -146,47 +147,47 @@
 
             <!-- #END# Right Sidebar -->
         </section>
-        
-        
-        
+
+
+
 
         <section class="content">
             <div class="container-fluid">
-<div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>
-                                Controle de Frequência
-                            </h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="body">
-                            <form>
-                                
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input type="text" ng-model="aluno.ra" class="form-control" placeholder="Entre com seu RA(Registro academico)">
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="card">
+                            <div class="header">
+                                <h2>
+                                    Controle de Frequência
+                                </h2>
+                                <ul class="header-dropdown m-r--5">
+                                    <li class="dropdown">
+                                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <i class="material-icons">more_vert</i>
+                                        </a>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li><a href="javascript:void(0);">Action</a></li>
+                                            <li><a href="javascript:void(0);">Another action</a></li>
+                                            <li><a href="javascript:void(0);">Something else here</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="body">
+                                <form method="POST" autocomplete="off">
+
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" ng-model="aluno.ra" class="form-control" placeholder="Entre com seu RA (Registro academico)">
+                                        </div>
                                     </div>
-                                </div>
-                                
-                                <button type="button" class="btn btn-primary m-t-15 waves-effect" ng-click="salvar()">Fazer registro</button>
-                            </form>
+
+                                    <button type="submit" class="btn btn-primary m-t-15 waves-effect" ng-click="salvar()">Fazer registro</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
                 <!-- Basic Examples -->
                 <div class="row clearfix">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -204,38 +205,46 @@
                                     </li>
                                 </ul>
                             </div>
-                            
+
                             <div class="body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-striped table-hover   dataTable">
                                         <thead>
                                             <tr>
+                                                <th>ID</th>
                                                 <th>RA</th>
                                                 <th>Nome</th>
+                                                <th>Tipo</th>
+
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
+                                                <th>ID</th>
                                                 <th>RA</th>
                                                 <th>Nome</th>
+                                                <th>Tipo</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
                                             <tr ng-repeat="item in listagem">
-                                               
-                                                <td>{{item.aluno.ra}}</td>
+
+                                                <td style="width: 70px;">{{item.id}}</td>
+                                                <td style="width: 90px;">{{item.aluno.ra}}</td>
                                                 <td>{{item.aluno.nome}}</td>
-                                               
-                                                <td style="width: 70px;">
-                                                    <button class="btn btn-default btn-lg btn-block" ng-click="alterar(item)" style="width: 60px;">
-                                                        <span class="glyphicon glyphicon-pencil">
-                                                    </button>
-                                                </td>
-                                                <td style="width: 70px;">
-                                                    <button class="btn btn-default btn-lg btn-block" ng-click="excluir(item)" style="width: 60px;">
-                                                        <span class="glyphicon glyphicon-trash">
-                                                    </button>
-                                                </td>
+                                                <td style="width: 70px;" >{{item.tipoFrequencia}}</td>
+                                         
+
+                                                <!--                                                <td style="width: 70px;">
+                                                                                                    <button class="btn btn-default btn-lg btn-block" ng-click="alterar(item)" style="width: 60px;">
+                                                                                                        <span class="glyphicon glyphicon-pencil">
+                                                                                                    </button>
+                                                                                                </td>
+                                                                                                <td style="width: 70px;">
+                                                                                                    <button class="btn btn-default btn-lg btn-block" ng-click="excluir(item)" style="width: 60px;">
+                                                                                                        <span class="glyphicon glyphicon-trash">
+                                                                                                    </button>
+                                                                                                </td>-->
 
                                             </tr>
                                         </tbody>

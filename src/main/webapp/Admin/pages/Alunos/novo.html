@@ -93,14 +93,14 @@
                 </div>
                 <div class="menu">
                     <ul class="list">
+                        <li>
                         <li class="header">MENU</li>
-                        <li class="active">
                             <a href="/Seimpar-Front/index.html">
                                 <i class="material-icons">home</i>
                                 <span>Início</span>
                             </a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="/seinpar/Admin/pages/Alunos/Index.html">
                                 <i class="material-icons">&#xE80C;</i>
                                 <span>Alunos</span>
@@ -145,28 +145,47 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <!--<input type="text" class="form-control"  name="name" required ng-model="aluno.nome">-->
-                                            <input name="name" type="text" ng-model="aluno.nome"
-                                                   uib-typeahead="aluno as aluno.ra for aluno in getAlunos($viewValue)"
+                                            <input name="name" required="true" type="text" ng-model="aluno.nome"
+                                                   
                                                    class="form-control">  
-                                            <label class="form-label">Nomeaaa</label>
+                                            <label class="form-label">Nome</label>
                                         </div>
                                     </div>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="ra" required  ng-model="aluno.ra">
+                                            <input type="text"  required="true" class="form-control" name="ra" ng-model="aluno.ra">
                                             <label class="form-label">Ra:</label>
                                         </div>
                                     </div>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="ra" required  ng-model="aluno.serie">
+                                            <input type="text"  required="true" class="form-control" name="serie"  ng-model="aluno.serie">
                                             <label class="form-label">Série</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input type="text" 
+                                                   required="true" 
+                                                   class="form-control" 
+                                                   name="serie"
+                                                   ng-model="aluno.materia1"
+                                                   >
+                                            <label class="form-label">Materia</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input type="text"  required="true" class="form-control" name="serie2"
+                                                   ng-model="aluno.materia2"
+                                                   />
+                                            <label class="form-label">Materia</label>
                                         </div>
                                     </div>
 
 
 
-                                    <button class="btn btn-primary waves-effect" ng-click="salvar()">SUBMIT</button>
+                                    <button class="btn btn-primary waves-effect" ng-click="salvar()"> <i class="material-icons">&#xE161;</i>Salvar</button>
                                 </form>
                             </div>
                         </div>

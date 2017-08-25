@@ -21,6 +21,7 @@ app.controller("alunosControler", function ($scope, $http) {
     };
 
     $scope.alterar = function (aluno) {
+        console.log("ola mundo");
         $scope.aluno = angular.copy(aluno);
     };
 

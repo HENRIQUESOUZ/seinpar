@@ -1,4 +1,4 @@
-package br.com.controle;
+    package br.com.controle;
 
 import Utils.RestUtil;
 import Utils.TipoFrequencia;
@@ -34,12 +34,8 @@ public class FrequenciaController implements Serializable {
     public List<Frequencia> listagem() {
         return frequenciaService.listar();
     }
-    @GET
-    @Path("/tipo")
-    public TipoFrequencia tipo() {
-        return  frequenciaService.tipoFrequencia();
-    }
 
+    
 
     @POST
     @Path("/")
@@ -48,11 +44,11 @@ public class FrequenciaController implements Serializable {
         try {
             aluno = frequenciaService.pesquisaRa(aluno.getRa());
             System.out.println(aluno);
-            if(aluno == null){
+            if (aluno == null) {
                 return RestUtil.responseMessage(Response.Status.BAD_REQUEST, "RA não encontrado.");
             }
-            frequenciaService.salvar(aluno);
-            return aluno;
+            return frequenciaService.salvar(aluno);
+           
         } catch (Exception e) {
             return RestUtil.responseMessage(Response.Status.BAD_REQUEST, "Falha ao Salvar");
         }
@@ -60,11 +56,20 @@ public class FrequenciaController implements Serializable {
     }
 
     @GET
+    @Path("/tipo")
+    public TipoFrequencia tipo() {
+        return frequenciaService.tipoFrequencia();
+    }
+    
+    @GET
     @Path("/tipo/{query}")
-    public Response autoComplete(@PathParam("query") TipoFrequencia tipo) {
+    public Response tipo(@PathParam("query") TipoFrequencia tipo) {
         frequenciaService.alteraTipoEntrada(tipo);
         return Utils.RestUtil.responseMessage(Response.Status.CREATED, "Alterado com sucesso para:" + tipo);
 
     }
-
+    
+    
+    
+    
 }
